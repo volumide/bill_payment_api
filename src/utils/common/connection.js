@@ -1,4 +1,4 @@
-import { Sequelize } from "sequelize"
+import Sequelize from "sequelize"
 import { DBTABLE, HOST, PASSWORD, USERNAME } from "./env.js"
 
 const dialect = "mysql"
