@@ -1,8 +1,8 @@
 import { login, signup } from "../controller/user.controller.js"
 
 const route = (app) => {
-  app.post("/signup", middleware, signup)
-  app.post("/login", middleware, login)
+  app.post("/signup", signup)
+  app.post("/login", login)
 }
 
 export default route

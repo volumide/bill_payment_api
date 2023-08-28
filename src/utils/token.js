@@ -1,5 +1,5 @@
 import jwt from "jsonwebtoken"
-import { FORBIDDEN } from "./common/status-code"
+import { FORBIDDEN } from "./common/status-code.js"
 
 export const accessToken = (user) => jwt.sign(user, "token")
 

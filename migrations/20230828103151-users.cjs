@@ -14,7 +14,10 @@ module.exports = {
       last_name: Sequelize.STRING,
       email: Sequelize.STRING,
       phone: Sequelize.STRING,
-      password: Sequelize.STRING
+      password: Sequelize.STRING,
+      createdAt: { type: Sequelize.DATE, allowNull: false, defaultValue: Sequelize.literal("CURRENT_TIMESTAMP") },
+      updatedAt: { type: Sequelize.DATE, allowNull: false, defaultValue: Sequelize.literal("CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP") },
+      deletedAt: { type: Sequelize.DATE, allowNull: true }
     })
   },
 

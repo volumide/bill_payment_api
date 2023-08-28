@@ -4,6 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -18,8 +20,10 @@
     "jsonwebtoken": "^9.0.1",
     "jwt-decode": "^3.1.2",
     "mysql2": "^3.6.0",
-    "nodemon": "^3.0.1",
     "sequelize": "^6.32.1"
   },
-  "type": "module"
+  "type": "module",
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  }
 }

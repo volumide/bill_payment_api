@@ -12,7 +12,10 @@ module.exports = {
       id: { type: Sequelize.INTEGER, allowNull: false, autoIncrement: true, primaryKey: true },
       user_id: Sequelize.STRING,
       status: { type: Sequelize.STRING, defaultValue: "initialize" },
-      reference: { type: Sequelize.STRING, allowNull: true }
+      reference: { type: Sequelize.STRING, allowNull: true },
+      createdAt: { type: Sequelize.DATE, allowNull: false, defaultValue: Sequelize.literal("CURRENT_TIMESTAMP") },
+      updatedAt: { type: Sequelize.DATE, allowNull: false, defaultValue: Sequelize.literal("CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP") },
+      deletedAt: { type: Sequelize.DATE, allowNull: true }
     })
   },
 

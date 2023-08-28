@@ -1,5 +1,5 @@
 import axios from "axios"
-import { FORBIDDEN, SUCCESS } from "../utils/common/status-code"
+import { FORBIDDEN, SUCCESS } from "../utils/common/status-code.js"
 
 const baseUrl = "https://walletdemo.remita.net/api/"
 

@@ -8,24 +8,18 @@ class User extends Model {}
 User.init(
   {
     id: { type: DataTypes.INTEGER, allowNull: false, autoIncrement: true, primaryKey: true },
-    first_name: DataTypes.STRING,
-    last_name: DataTypes.STRING,
-    phone: DataTypes.STRING,
-    email: DataTypes.STRING,
+    first_name: { type: DataTypes.STRING, allowNull: false },
+    last_name: { type: DataTypes.STRING, allowNull: false },
+    phone: { type: DataTypes.STRING, allowNull: false },
+    email: { type: DataTypes.STRING, allowNull: false },
     password: {
-      type: DataTypes.STRING,
-      set(val) {
-        this.setDataValue(
-          "password",
-          bcrypt
-            .hash(val.toString(), salt)
-            .then(() => console.log(""))
-            .catch((err) => console.log(err))
-        )
-      }
+      type: DataTypes.STRING
     }
   },
   { sequelize, tableName: "users", paranoid: true }
 )
-
+User.beforeCreate(async (user, options) => {
+  const hashPassword = await bcrypt.hash(user.password, salt)
+  user.password = hashPassword
+})
 export default User
