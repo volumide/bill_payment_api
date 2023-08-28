@@ -1,8 +1,6 @@
 import { Model, DataTypes } from "sequelize"
 import sequelize from "../utils/common/connection.js"
-import bcrypt from "bcrypt"
 
-const salt = 12
 class Transaction extends Model {}
 
 Transaction.init(
