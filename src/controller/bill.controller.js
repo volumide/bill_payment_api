@@ -114,3 +114,10 @@ export const purcahseElectricity = async (req, res) => {
     })
   }
 }
+
+export const services = (req, res) => {
+  return res.status(SUCCESS).json({
+    status: SUCCESS,
+    data: providers
+  })
+}
