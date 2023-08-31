@@ -1,5 +1,6 @@
 import jwt from "jsonwebtoken"
 import { FORBIDDEN } from "./common/status-code.js"
+import jwtDecode from "jwt-decode"
 
 export const accessToken = (user) => jwt.sign(user, "token")
 
@@ -20,4 +21,10 @@ export const middleware = (req, res, next) => {
       next()
     }
   })
+}
+
+export const decode = (req) => {
+  const auth = req.headers["authorization"]
+  const token = auth.split(" ")[1]
+  return jwtDecode(token)
 }

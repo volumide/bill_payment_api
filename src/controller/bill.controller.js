@@ -1,6 +1,8 @@
 import axios from "axios"
 import { BAD_REQUEST, FORBIDDEN, SUCCESS } from "../utils/common/status-code.js"
 import Transaction from "../model/transaction.model.js"
+import providers from "../static/providers.js"
+import { decode } from "../utils/token.js"
 
 /**
  *  the supplied api endpoint does not retrun any response all response starting from registeration all return status cod 403
@@ -43,20 +45,8 @@ export const verifyMerchernt = async (req, res) => {
 }
 
 export const purcahseElectricity = async (req, res) => {
-  // const dtObj = {
-  //   "customerPhoneNumber": req.body.phone,
-  //   "paymentMethod": "cash",
-  //   "service": req.body.service,
-  //   "clientReference": "asd4978716271752715157570",
-  //   "productCode": req.body.code,
-  //   "card": {},
-  //   "amount": req.body.amount,
-  //   "sourceAccountNumber": req.body.acctNumber,
-  //   "transactionPin": req.body.tranPin,
-  //   "narration": "electricity",
-  //   "redeemBonus": false,
-  //   "bonusAmount": 0
-  // }
+  const user = decode(req)
+
   const now = new Date()
   const year = now.getFullYear()
   const month = String(now.getMonth() + 1).padStart(2, "0")
@@ -84,7 +74,7 @@ export const purcahseElectricity = async (req, res) => {
     const result = await axios.post(baseUrl + "pay", dtObj, { auth: auth })
     if (result.data.code === "000") {
       await Transaction.create({
-        user_id: req.body.user_id,
+        user_id: user.id,
         reference: request_id,
         status: "success"
       })
@@ -96,7 +86,7 @@ export const purcahseElectricity = async (req, res) => {
     }
 
     await Transaction.create({
-      user_id: req.body.user_id,
+      user_id: user.id,
       reference: request_id,
       status: "fail"
     })
