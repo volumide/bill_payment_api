@@ -11,6 +11,21 @@ import { decode } from "../utils/token.js"
  */
 
 // const baseUrl = "https://walletdemo.remita.net/api/"
+// wallet demo object
+// const dtObj = {
+//   "customerPhoneNumber": req.body.phone,
+//   "paymentMethod": "cash",
+//   "service": req.body.service,
+//   "clientReference": "asd4978716271752715157570",
+//   "productCode": req.body.code,
+//   "card": {},
+//   "amount": req.body.amount,
+//   "sourceAccountNumber": req.body.acctNumber,
+//   "transactionPin": req.body.tranPin,
+//   "narration": "electricity",
+//   "redeemBonus": false,
+//   "bonusAmount": 0
+// }
 
 // this is the improvised api end point for merchant verifification and electricity payment
 const baseUrl = "https://sandbox.vtpass.com/api/"
