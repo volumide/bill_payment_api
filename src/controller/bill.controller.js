@@ -85,6 +85,14 @@ export const purcahseElectricity = async (req, res) => {
   }
 
   try {
+    const verify = await axios.post(baseUrl + "merchant-verify", dtObj, { auth: auth })
+    const vResult = result.data
+    if (vResult["code"] !== "000") {
+      return res.status(FORBIDDEN).json({
+        status: FORBIDDEN,
+        message: "Invalid meter number"
+      })
+    }
     // const result = await axios.post(baseUrl + "itex/purchase/electricity", dtObj)
     const result = await axios.post(baseUrl + "pay", dtObj, { auth: auth })
     if (result.data.code === "000") {
