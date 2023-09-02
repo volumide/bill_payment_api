@@ -42,7 +42,7 @@ export const signUp = async (req, res) => {
   }
 }
 
-export const login = async (req, res) => {
+export const mongoLogin = async (req, res) => {
   try {
     const checkUserExist = await userModel.findOne({ email: req.body["email"] })
     if (!checkUserExist) {

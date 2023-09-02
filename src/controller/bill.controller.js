@@ -107,7 +107,7 @@ export const purcahseElectricity = async (req, res) => {
           status: "success"
         }) 
       */
-      TransactionModel.create({
+      await TransactionModel.create({
         user_id: user.id,
         reference: request_id,
         trans_id: new Date().getTime(),
@@ -120,7 +120,7 @@ export const purcahseElectricity = async (req, res) => {
       })
     }
 
-    await Transaction.create({
+    await TransactionModel.create({
       user_id: user.id,
       reference: request_id,
       status: "fail"
