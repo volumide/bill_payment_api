@@ -18,8 +18,9 @@ User.init(
   },
   { sequelize, tableName: "users", paranoid: true }
 )
+
 User.beforeCreate(async (user, options) => {
-  const hashPassword = await bcrypt.hash(user.password, salt)
+  const hashPassword = await bcrypt.hash(user.password.toString(), salt)
   user.password = hashPassword
 })
 export default User

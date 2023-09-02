@@ -3,6 +3,7 @@ import { BAD_REQUEST, FORBIDDEN, SUCCESS } from "../utils/common/status-code.js"
 import Transaction from "../model/transaction.model.js"
 import providers from "../static/providers.js"
 import { decode } from "../utils/token.js"
+import TransactionModel from "../model/mongodb/transaction.schema.js"
 
 /**
  *  the supplied api endpoint does not retrun any response all response starting from registeration all return status cod 403
@@ -33,6 +34,7 @@ const auth = {
   username: "volumide42@gmail.com",
   password: "Olumide1"
 }
+//
 
 export const verifyMerchernt = async (req, res) => {
   // const { meterNo, accountType, service, amount, user_id } = req.body
@@ -86,7 +88,7 @@ export const purcahseElectricity = async (req, res) => {
 
   try {
     const verify = await axios.post(baseUrl + "merchant-verify", dtObj, { auth: auth })
-    const vResult = result.data
+    const vResult = verify.data
     if (vResult["code"] !== "000") {
       return res.status(FORBIDDEN).json({
         status: FORBIDDEN,
@@ -96,9 +98,19 @@ export const purcahseElectricity = async (req, res) => {
     // const result = await axios.post(baseUrl + "itex/purchase/electricity", dtObj)
     const result = await axios.post(baseUrl + "pay", dtObj, { auth: auth })
     if (result.data.code === "000") {
-      await Transaction.create({
+      // mysql transaction creation
+      /*
+        await Transaction.create({
+          user_id: user.id,
+          reference: request_id,
+          trans_id: new Date().getTime(),
+          status: "success"
+        }) 
+      */
+      TransactionModel.create({
         user_id: user.id,
         reference: request_id,
+        trans_id: new Date().getTime(),
         status: "success"
       })
       return res.status(SUCCESS).json({

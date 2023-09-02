@@ -1,5 +1,5 @@
 import User from "../model/user.model.js"
-import { BAD_REQUEST, CREATED, FORBIDDEN, NOT_FOUND, SERVER_ERROR, SUCCESS } from "../utils/common/status-code.js"
+import { BAD_REQUEST, CONFLICT, CREATED, FORBIDDEN, NOT_FOUND, SERVER_ERROR, SUCCESS } from "../utils/common/status-code.js"
 import bcrypt from "bcrypt"
 import { accessToken } from "../utils/token.js"
 import { validateEmail } from "../utils/email-helper.js"
@@ -29,7 +29,7 @@ export const signup = async (req, res) => {
     // sanitize email
     const checkMail = validateEmail(req.body.email)
     if (!checkMail)
-      return res.status(FORBIDDEN).json({
+      return res.status(CONFLICT).json({
         status: FORBIDDEN,
         message: "invalid mail format"
       })
@@ -40,8 +40,8 @@ export const signup = async (req, res) => {
     })
 
     if (checkUser) {
-      return res.status(FORBIDDEN).json({
-        status: FORBIDDEN,
+      return res.status(CONFLICT).json({
+        status: CONFLICT,
         message: "user already exist "
       })
     }
