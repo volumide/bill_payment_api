@@ -1,13 +1,13 @@
 import mongoose from "mongoose"
-import { CONNECTION_STRING } from "../env"
+import { CONNECTION_STRING } from "../env.js"
 const connection = async () => {
   try {
     const connString = CONNECTION_STRING
-    await mongoose.connect(connString, {
+    const connect = await mongoose.connect(connString, {
       useNewUrlParser: true,
       useUnifiedTopology: true
     })
-    console.log("connection successful")
+    console.log("mongo connection success")
   } catch (error) {
     console.log(error)
   }

@@ -1,8 +1,8 @@
-import userModel from "../../model/mongodb/user.schema"
-import { BAD_REQUEST, CONFLICT, FORBIDDEN, NOT_FOUND, SUCCESS } from "../../utils/common/status-code"
-import { validateEmail } from "../../utils/email-helper"
+import userModel from "../../model/mongodb/user.schema.js"
+import { BAD_REQUEST, CONFLICT, FORBIDDEN, NOT_FOUND, SUCCESS, CREATED } from "../../utils/common/status-code.js"
+import { validateEmail } from "../../utils/email-helper.js"
 import bcrypt from "bcrypt"
-import { accessToken } from "../../utils/token"
+import { accessToken } from "../../utils/token.js"
 
 export const signUp = async (req, res) => {
   try {
